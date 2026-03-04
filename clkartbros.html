@@ -526,25 +526,18 @@
     }
 
     function ShowVideo(theUnitName, forceAip) {
-      var unitName = theUnitName || "kartbros-io_preroll";
-      var forceFallback = !!forceAip;
+  console.log("Offline build: Skipping video ad for", theUnitName);
 
-      console.log("SHOW_VIDEO", unitName, "forceAip:", forceFallback);
-
-      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
-        var prerollElement = document.getElementById("preroll");
-        if (prerollElement) {
-          prerollElement.style.display = "none";
-          prerollElement.style.visibility = "hidden";
-        }
-        completeVideoAd(false);
-        return;
-      }
+  // Simulate slight delay so game flow feels normal
+  setTimeout(function() {
+    completeVideoAd(false); // false = not adblocked
+  }, 50);
+}
 
       if (!forceFallback && window.isMsStart && typeof window.$msstart !== "undefined" && typeof window.$msstart.showAdsAsync === "function") {
         if (!msVideoInstanceId) {
           console.log("MSStart ad not ready, falling back to AIP");
-          loadMsVideoAsync();
+          
         } else {
           window.$msstart.showAdsAsync(msVideoInstanceId).then(function(adInstance) {
             var completion = adInstance && adInstance.showAdsCompletedAsync;
@@ -553,23 +546,23 @@
                 console.log("MS Video Ad Complete");
                 trackAdEvent("ms_video_shown2");
                 completeVideoAd(false);
-                loadMsVideoAsync();
+                
               }).catch(function(err) {
                 console.log("MS video not completed", err);
                 trackAdEvent("ms_video_not_completed");
-                loadMsVideoAsync();
+                
                 ShowVideo(unitName, true);
               });
             } else {
               console.log("MS video completion promise missing");
               trackAdEvent("ms_video_shown2");
               completeVideoAd(false);
-              loadMsVideoAsync();
+              
             }
           }).catch(function(err) {
             console.log("MS Video Ad Error, showing AIP fallback", err);
             trackAdEvent("ms_video_show_error2");
-            loadMsVideoAsync();
+            
             ShowVideo(unitName, true);
           });
           return;
@@ -599,13 +592,13 @@
     }
 
     function LoadVideo() {
-      loadMsVideoAsync();
+      
     }
 
     window.LoadVideo = LoadVideo;
     window.ShowVideo = ShowVideo;
 
-    loadMsVideoAsync();
+    
   </script>
 </head>
 
@@ -910,4 +903,5 @@
 
 
 </html>
+
 
