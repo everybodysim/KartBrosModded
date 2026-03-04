@@ -68,6 +68,11 @@
       "playMode": "MultiPlayer"
     }
   </script>
+  // Stub MS video loader for offline/testing build
+window.loadMsVideoAsync = function() {
+    console.log("Offline build: loadMsVideoAsync stub called");
+    return Promise.resolve(null);
+};
   <script>
     function fit() {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -596,20 +601,12 @@
     }
 
     function ShowVideo(theUnitName, forceAip) {
-      var unitName = theUnitName || "kartbros-io_preroll";
-      var forceFallback = !!forceAip;
+  console.log("Offline build: Simulating rewarded ad");
 
-      console.log("SHOW_VIDEO", unitName, "forceAip:", forceFallback);
-
-      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
-        var prerollElement = document.getElementById("preroll");
-        if (prerollElement) {
-          prerollElement.style.display = "none";
-          prerollElement.style.visibility = "hidden";
-        }
-        completeVideoAd(false);
-        return;
-      }
+  setTimeout(function () {
+    completeVideoAd(false);
+  }, 50);
+}
 
       if (!forceFallback && window.isMsStart && typeof window.$msstart !== "undefined" && typeof window.$msstart.showAdsAsync === "function") {
         if (!msVideoInstanceId) {
@@ -979,3 +976,4 @@
 </body>
 
 </html>
+
