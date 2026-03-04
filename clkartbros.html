@@ -7,7 +7,7 @@
 
 
 <html lang="en-us">
-<!--<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/kart%20bros/">-->
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/kart%20bros/">
 <head>
   <meta charset="utf-8">
   <title>KART BROS! - Free Online .io Kart Racing Game</title> 
@@ -155,7 +155,7 @@
       width: calc(100%);
       float: left;
       /* display: block; */
-      /* Add object-fit-like behavior for canvas */
+      /* d object-fit-like behavior for canvas */
       /* position: relative; */
     }
 
@@ -396,76 +396,6 @@
   </script>
 
   <!-- AdinPlay Ads Snippet Integration -->
-  <script>
-    window.aiptag = window.aiptag || {
-      cmd: []
-    };
-    aiptag.cmd.display = aiptag.cmd.display || [];
-    aiptag.cmd.player = aiptag.cmd.player || [];
-
-    // CMP tool settings
-    aiptag.cmp = {
-      show: true,
-      button: true,
-      buttonText: "Privacy settings",
-      buttonPosition: "bottom-left"
-    };
-
-    // Initialize the video ad player
-    aiptag.cmd.player.push(function() {
-      aiptag.adplayer = new aipPlayer({
-        AD_WIDTH: 960,
-        AD_HEIGHT: 540,
-        AD_DISPLAY: 'default', // default, fullscreen, fill, center, modal-center
-        LOADING_TEXT: 'loading advertisement',
-        PREROLL_ELEM: function() {
-          return document.getElementById('videoad');
-        },
-        AIP_COMPLETE: function(state) {
-          console.log("Video Ad Completed: " + state);
-          if (typeof SendEvent === "function") {
-            SendEvent("event", "aip_video_completed", {
-              state: state
-            });
-          }
-          if (typeof completeVideoAd === "function") {
-            completeVideoAd(false);
-          }
-        }
-      });
-    });
-  </script>
-  <script>
-    (function() {
-      function detectMsStart() {
-        var uri = window.location.pathname + window.location.search + window.location.hash;
-        var lowerUri = (uri || '').toLowerCase();
-        var params = new URLSearchParams(window.location.search || '');
-        if (params.has('ms') || params.has('msstart_sdk_init')) {
-          return true;
-        }
-        if (lowerUri.indexOf('msstart_sdk_init') !== -1) {
-          return true;
-        }
-        return lowerUri.indexOf('ms') !== -1;
-      }
-
-      window.isMsStart = detectMsStart();
-      if (window.isMsStart) {
-        window.msStart = true;
-        var msSdkScript = document.createElement('script');
-        msSdkScript.src = 'https://assets.msn.com/staticsb/statics/latest/msstart-games-sdk/msstart-v1.0.0-rc.19.min.js';
-        msSdkScript.async = true;
-        msSdkScript.addEventListener('load', function() {
-          if (typeof window.loadMsVideoAsync === 'function') {
-            window.loadMsVideoAsync();
-          }
-        });
-        document.head.appendChild(msSdkScript);
-      }
-    })();
-  </script>
-  <script async src="//api.adinplay.com/libs/aiptag/pub/SSK/kartbros.io/tag.min.js"></script>
   <!-- End AdinPlay Snippet -->
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1BSXC3Y865"></script>
@@ -980,3 +910,4 @@
 
 
 </html>
+
